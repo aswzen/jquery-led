@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title> jQuery LED </title>
+        <link rel="canonical" href="http://sizeof.cat/jquery/led/">
+        <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700|PT+Sans:400">
+
+    </head>
+
+<body class="theme-base-0g">
+
+    <div class="wrap">
+        <div class="masthead">
+            <div class="container">
+                <h3 class="masthead-title">
+                    <a href="http://sizeof.cat/" title="Home">Home</a> &raquo; 
+                    <a href="http://sizeof.cat/jquery" title="jQuery plugins">jQuery</a> &raquo;
+                    jQuery LED
+                </h3>
+            </div>
+        </div>
+        <div class="container content">
+            <h1 class="post-title">jQuery LED</h1>
+            <section id="main">
+                <p>This <a href="http://www.jquery.com">jQuery</a> plugin can be used as a countdown, a clock or as a random numbers.</p>
+
+<p></p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Language</td>
+<td>Javascript</td>
+</tr>
+
+<tr>
+<td>License</td>
+<td><a href="https://github.com/sizeofcat/jquery-led/blob/master/LICENSE">MIT</a></td>
+</tr>
+
+<tr>
+<td>Version</td>
+<td>2.0.0</td>
+</tr>
+
+<tr>
+<td>Release date</td>
+<td>January 22, 2017</td>
+</tr>
+
+<tr>
+<td>Download</td>
+<td><a href="https://github.com/sizeofcat/jquery-led/archive/master.zip">zip archive</a></td>
+</tr>
+
+<tr>
+<td>Source</td>
+<td><code>git clone https://github.com/sizeofcat/jquery-led.git</code></td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="setup">Setup</h2>
+
+<p>First you need to include the jQuery and Raphael libraries, since LED depends on them. You can download them from the jQuery website, <a href="http://raphaeljs.com/">Raphael website</a> or link them directly from the Google CDN.</p>
+
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span></span><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;//ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;//github.com/DmitryBaranovskiy/raphael/raw/master/raphael.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</code></pre></div>
+
+
+<p>Secondly, you need to include the LED Javascript file into your page. You can do it by adding the code below to your page.</p>
+
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span></span><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;js/jquery-led.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</code></pre></div>
+
+
+<p>Next, you create the element container that you want to apply <em>catLED()</em> on.</p>
+
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span></span><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;led1&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></div>
+
+
+<p>As the last step, you trigger the <em>catLED()</em> function on the element you just created. In this case, we trigger the function on the div with the class <em>led</em>.</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.led1&#39;</span><span class="p">).</span><span class="nx">catLED</span><span class="p">({</span>
+    <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;countdown&#39;</span><span class="p">,</span>
+    <span class="nx">format</span><span class="o">:</span> <span class="s1">&#39;ddd:hh:mm:ss&#39;</span><span class="p">,</span>
+    <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;#eee&#39;</span><span class="p">,</span>
+    <span class="nx">background_color</span> <span class="s1">&#39;#000&#39;</span><span class="p">,</span>
+    <span class="nx">size</span><span class="o">:</span> <span class="mi">16</span>
+<span class="p">});</span>
+</code></pre></div>
+
+
+<h2 id="settings">Settings</h2>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>type</td>
+<td>&lsquo;time&rsquo;</td>
+<td>Type of the LED display, can be <em>countdown</em>, <em>random</em>, <em>number</em> or <em>time</em>.</td>
+</tr>
+
+<tr>
+<td>format</td>
+<td>&lsquo;hh&rdquo;mm&rsquo;</td>
+<td>Time format for the led (ex. &ldquo;hh:mm:ss&rdquo;).</td>
+</tr>
+
+<tr>
+<td>value</td>
+<td></td>
+<td>If the LED type is <em>number</em>, specify the desired number here.</td>
+</tr>
+
+<tr>
+<td>color</td>
+<td>&rsquo;#fff&rsquo;</td>
+<td>Hex color of the digits.</td>
+</tr>
+
+<tr>
+<td>background_color</td>
+<td>&rsquo;#000&rsquo;</td>
+<td>Hex color of the background.</td>
+</tr>
+
+<tr>
+<td>size</td>
+<td>12</td>
+<td>LED digit size in pixels.</td>
+</tr>
+
+<tr>
+<td>rounded</td>
+<td>1</td>
+<td>Round radius of the LED digits.</td>
+</tr>
+
+<tr>
+<td>spacing</td>
+<td>1</td>
+<td>Spacing between the digits.</td>
+</tr>
+
+<tr>
+<td>font_type</td>
+<td>1</td>
+<td>Type of the LED font display, between <em>1</em> and <em>3</em>.</td>
+</tr>
+
+<tr>
+<td>hour_format</td>
+<td>24</td>
+<td>Hour format, can be <em>12</em> or <em>24</em>.</td>
+</tr>
+
+<tr>
+<td>count_to</td>
+<td></td>
+<td>If it&rsquo;s a countdown, the date to which we count to, following the yyyy:mm:dd format, for ex: <em>2015:12:25</em>, default is the end of the current year.</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="demo">Demo</h2>
+
+<p>Countdown to the end of current year</p>
+
+<div class="led1"></div>
+
+<p>Code:</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.led1&#39;</span><span class="p">).</span><span class="nx">catLED</span><span class="p">({</span>
+    <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;countdown&#39;</span><span class="p">,</span>
+    <span class="nx">format</span><span class="o">:</span> <span class="s1">&#39;ddd:hh:mm:ss&#39;</span><span class="p">,</span>
+    <span class="nx">hour_format</span><span class="o">:</span> <span class="mi">12</span><span class="p">,</span>
+    <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;#fa0&#39;</span><span class="p">,</span>
+    <span class="nx">background_color</span><span class="o">:</span> <span class="s1">&#39;#fafafa&#39;</span><span class="p">,</span>
+    <span class="nx">rounded</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">font_type</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="nx">size</span><span class="o">:</span> <span class="mi">9</span>
+<span class="p">});</span>
+</code></pre></div>
+
+
+<p>Show current time</p>
+
+<div class="led2"></div>
+
+<p>Code:</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.led2&#39;</span><span class="p">).</span><span class="nx">catLED</span><span class="p">({</span>
+    <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;time&#39;</span><span class="p">,</span>
+    <span class="nx">format</span><span class="o">:</span> <span class="s1">&#39;hh:mm&#39;</span><span class="p">,</span>
+    <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;#ed1978&#39;</span><span class="p">,</span>
+    <span class="nx">background_color</span><span class="o">:</span> <span class="s1">&#39;#ccc&#39;</span><span class="p">,</span>
+    <span class="nx">size</span><span class="o">:</span> <span class="mi">8</span><span class="p">,</span>
+    <span class="nx">rounded</span><span class="o">:</span> <span class="mi">4</span><span class="p">,</span>
+    <span class="nx">font_type</span><span class="o">:</span> <span class="mi">1</span>
+<span class="p">});</span>
+</code></pre></div>
+
+
+<p>Countdown to Christmas (days-hours-minutes-seconds)</p>
+
+<div class="led3"></div>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.led3&#39;</span><span class="p">).</span><span class="nx">catLED</span><span class="p">({</span>
+    <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;countdown&#39;</span><span class="p">,</span>
+    <span class="nx">format</span><span class="o">:</span> <span class="s1">&#39;ddd:hh:mm:ss&#39;</span><span class="p">,</span>
+    <span class="nx">count_to</span><span class="o">:</span> <span class="s1">&#39;2017:12:25&#39;</span><span class="p">,</span>
+    <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;#ff0000&#39;</span><span class="p">,</span>
+    <span class="nx">background_color</span><span class="o">:</span> <span class="s1">&#39;#fff&#39;</span><span class="p">,</span>
+    <span class="nx">size</span><span class="o">:</span> <span class="mi">8</span><span class="p">,</span>
+    <span class="nx">font_type</span><span class="o">:</span> <span class="mi">2</span>
+<span class="p">});</span>
+</code></pre></div>
+
+
+<p>Countdown to New Year (days-hours)</p>
+
+<div class="led4"></div>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.led4&#39;</span><span class="p">).</span><span class="nx">catLED</span><span class="p">({</span>
+    <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;countdown&#39;</span><span class="p">,</span>
+    <span class="nx">format</span><span class="o">:</span> <span class="s1">&#39;ddd:hh&#39;</span><span class="p">,</span>
+    <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;#0000ff&#39;</span><span class="p">,</span>
+    <span class="nx">background_color</span><span class="o">:</span> <span class="s1">&#39;#888&#39;</span><span class="p">,</span>
+    <span class="nx">size</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="nx">font_type</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="nx">rounded</span><span class="o">:</span> <span class="mi">6</span>
+<span class="p">});</span>
+</code></pre></div>
+
+
+<p>Random numbers</p>
+
+<div class="led5"></div>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.led5&#39;</span><span class="p">).</span><span class="nx">catLED</span><span class="p">({</span>
+    <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;random&#39;</span><span class="p">,</span>
+    <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;#ed1978&#39;</span><span class="p">,</span>
+    <span class="nx">background_color</span><span class="o">:</span> <span class="s1">&#39;#fff&#39;</span><span class="p">,</span>
+    <span class="nx">size</span><span class="o">:</span> <span class="mi">6</span><span class="p">,</span>
+    <span class="nx">rounded</span><span class="o">:</span> <span class="mi">9</span><span class="p">,</span>
+    <span class="nx">font_type</span><span class="o">:</span> <span class="mi">3</span>
+<span class="p">});</span>
+</code></pre></div>
+
+
+<script src="js/jquery.js"></script>
+<script src="js/raphael.js"></script>
+<script src="js/jquery-led.js"></script>
+<script>
+$(document).ready(function() {
+    $('.led1').catLED({
+        type: 'countdown',
+        format: 'ddd:hh:mm:ss',
+        hour_format: 12,
+        color: '#fa0',
+        background_color: '#fafafa',
+        rounded: 0,
+        font_type: 2,
+        size: 9
+    });
+    $('.led2').catLED({
+        type: 'time',
+        format: 'hh:mm',
+        color: '#ed1978',
+        background_color: '#ccc',
+        size: 8,
+        rounded: 4,
+        font_type: 1
+    });
+    $('.led3').catLED({
+        type: 'countdown',
+        format: 'ddd:hh:mm:ss',
+        count_to: '2017:12:25',
+        color: '#ff0000',
+        background_color: '#fff',
+        size: 8,
+        font_type: 2
+    });
+    $('.led4').catLED({
+        type: 'countdown',
+        format: 'ddd:hh',
+        color: '#0000ff',
+        background_color: '#888',
+        size: 10,
+        font_type: 2,
+        rounded: 6
+    });
+    $('.led5').catLED({
+        type: 'random',
+        color: '#ed1978',
+        background_color: '#fff',
+        size: 6,
+        rounded: 9,
+        font_type: 3
+    });
+});
+</script>
+            </section>
+        </div>
+    </div>
+    <br />
+            <div class="container content">
+            <footer>
+                <div>
+                    <p class="right credit">&copy;  <a href="http://sizeof.cat/">sizeof.cat</a> - powered by <a href="https://gohugo.io/">Hugo</a> and hosted via <a href="http://pages.github.com/">GitHub Pages</a>. <a href="http://sizeof.cat/index.xml">RSS</a></p>
+                </div>
+            </footer>
+        </div>
+    </body>
+</html>
+
