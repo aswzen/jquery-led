@@ -45,6 +45,15 @@
 				"0   0     0 0         0     0     0 0   0     0 0   0     0   0        ",
 				"00000     0 00000 00000     0 00000 00000     0 00000 00000            "
 			];
+			this.font4 = [
+			    " 000  0000  00000 0000  00000 00000 00000 0   0   0   00000 0   0 0     00 00 0   0 00000 00000 00000 00000 00000 00000 0   0 0    0 0   0 0   0 0   0 00000 00000 ",
+				"0   0 0   0 0     0   0 0     0     0     0   0   0       0 0  0  0     0 0 0 00  0 0   0 0   0 0   0 0   0 0       0   0   0 0    0 0   0  0 0  0   0    0  0   0 ",
+				"0   0 0   0 0     0   0 0     0     0     0   0   0       0 0 0   0     0 0 0 0 0 0 0   0 0   0 0   0 0   0 0       0   0   0 0    0 0   0   0   0   0   0   0 000 ",
+				"00000 0000  0     0   0 00000 00000 0  00 00000   0       0 00    0     0 0 0 0  00 0   0 00000 0   0 00000 00000   0   0   0 0    0 0   0   0    0 0   0    0 0 0 ",
+				"0   0 0   0 0     0   0 0     0     0   0 0   0   0       0 0 0   0     0   0 0   0 0   0 0     00000 0 0       0   0   0   0 0    0 0 0 0   0     0   0     0 0 0 ",
+				"0   0 0   0 0     0   0 0     0     0   0 0   0   0       0 0  0  0     0   0 0   0 0   0 0      0    0  0      0   0   0   0  0  0  0 0 0  0 0    0   0     0 0 0 ",
+				"0   0 0000  00000 0000  00000 0     00000 0   0   0   00000 0   0 00000 0   0 0   0 00000 0       00  0   0 00000   0   00000   00   00000 0   0   0   00000 0 000 "
+			];
 			this.led;
 			this.__constructor = function(conf) {
 				var start = new Date();
@@ -84,6 +93,9 @@
 					if (self.type === "time") {
 						self.update_led2(d);
 					}
+					if (self.type === "custom") {
+						self.update_custom();
+					}
 					if (self.type === "random" || self.type === "number") {
 						self.update_led0();
 					} else {
@@ -102,7 +114,19 @@
 						}
 					}
 					update_time();
-				} else if (this.type === "number") {
+				} else if (this.type === "custom") {
+					r = Raphael($(element)[0], this.digits * 6 * (h_w + this.spacing) - (h_w + 2 * this.spacing), 7 * (h_w + this.spacing) - this.spacing);
+					for (var i = 0; i < this.digits * 6; i++) {
+						this.dig[i] = [];
+						for (var y = 0; y < 7; y++) {
+							this.dig[i][y] = r.rect(i * (h_w + this.spacing), y * (h_w + this.spacing), h_w, h_w, this.rounded).attr({
+								fill: this.background_color,
+								stroke: null
+							});
+						}
+					}
+					update_time();
+				}  else if (this.type === "number") {
 					r = Raphael($(element)[0], this.digits * 6 * (h_w + this.spacing) - (h_w + 2 * this.spacing), 7 * (h_w + this.spacing) - this.spacing);
 					for (var i = 0; i < this.digits * 6; i++) {
 						this.dig[i] = [];
@@ -143,6 +167,9 @@
 					}
 					update_time();
 				}
+			};
+			this.update_custom = function() {
+				this._tick(this.value, 'string');
 			};
 			this.update_led0 = function() {
 				var num = '';
@@ -196,20 +223,66 @@
 				}
 				this._tick(num);
 			};
-			this._tick = function(num) {
-				var razd = 0;
-				for (var l = 0; l < num.length; l++) {
-					num.charAt(l) === ":" ? razd = 10 : (num.charAt(l) === " " ? razd = 11 : razd = num.charAt(l));
-					for (var i = 0; i < 6; i++) {
-						for (var y = 0; y < 7; y++) {
-							if (this.led[y].charAt(razd * 6 + i) === "0" && this.dig[l * 6 + i][y].attrs.fill === this.background_color) {
-								this.dig[l * 6 + i][y].animate({
-									fill: this.color
-								}, 300);
-							} else if (this.led[y].charAt(razd * 6 + i) === " " && this.dig[l * 6 + i][y].attrs.fill !== this.background_color) {
-								this.dig[l * 6 + i][y].animate({
-									fill: this.background_color
-								}, 300);
+			this._tick = function(num, type) {
+				if(type=='string'){
+					for (var l = 0; l < num.length; l++) {
+						num.charAt(l) === ":" ? razd = 10 : (num.charAt(l) === " " ? razd = 11 : razd = num.charAt(l));
+						if(razd == "A")razd = 0;
+						if(razd == "B")razd = 1;
+						if(razd == "C")razd = 2;
+						if(razd == "D")razd = 3;
+						if(razd == "E")razd = 4;
+						if(razd == "F")razd = 5;
+						if(razd == "G")razd = 6;
+						if(razd == "H")razd = 7;
+						if(razd == "I")razd = 8;
+						if(razd == "J")razd = 9;
+						if(razd == "K")razd = 10;
+						if(razd == "L")razd = 11;
+						if(razd == "M")razd = 12;
+						if(razd == "N")razd = 13;
+						if(razd == "O")razd = 14;
+						if(razd == "P")razd = 15;
+						if(razd == "Q")razd = 16;
+						if(razd == "R")razd = 17;
+						if(razd == "S")razd = 18;
+						if(razd == "T")razd = 19;
+						if(razd == "U")razd = 20;
+						if(razd == "V")razd = 21;
+						if(razd == "W")razd = 22;
+						if(razd == "X")razd = 23;
+						if(razd == "Y")razd = 24;
+						if(razd == "Z")razd = 25;
+						if(razd == "@")razd = 26;
+						for (var i = 0; i < 6; i++) {
+							for (var y = 0; y < 7; y++) {
+								if (this.led[y].charAt(razd * 6 + i) === "0" && this.dig[l * 6 + i][y].attrs.fill === this.background_color) {
+									this.dig[l * 6 + i][y].animate({
+										fill: this.color
+									}, 300);
+								} else if (this.led[y].charAt(razd * 6 + i) === " " && this.dig[l * 6 + i][y].attrs.fill !== this.background_color) {
+									this.dig[l * 6 + i][y].animate({
+										fill: this.background_color
+									}, 300);
+								}
+							}
+						}
+					}
+				} else {
+					var razd = 0;
+					for (var l = 0; l < num.length; l++) {
+						num.charAt(l) === ":" ? razd = 10 : (num.charAt(l) === " " ? razd = 11 : razd = num.charAt(l));
+						for (var i = 0; i < 6; i++) {
+							for (var y = 0; y < 7; y++) {
+								if (this.led[y].charAt(razd * 6 + i) === "0" && this.dig[l * 6 + i][y].attrs.fill === this.background_color) {
+									this.dig[l * 6 + i][y].animate({
+										fill: this.color
+									}, 300);
+								} else if (this.led[y].charAt(razd * 6 + i) === " " && this.dig[l * 6 + i][y].attrs.fill !== this.background_color) {
+									this.dig[l * 6 + i][y].animate({
+										fill: this.background_color
+									}, 300);
+								}
 							}
 						}
 					}

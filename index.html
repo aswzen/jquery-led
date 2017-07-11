@@ -117,7 +117,7 @@
 <tr>
 <td>type</td>
 <td>&lsquo;time&rsquo;</td>
-<td>Type of the LED display, can be <em>countdown</em>, <em>random</em>, <em>number</em> or <em>time</em>.</td>
+<td>Type of the LED display, can be <em>countdown</em>, <em>random</em>, <em>number</em>, <em>custom</em> or <em>time</em>.</td>
 </tr>
 
 <tr>
@@ -129,7 +129,7 @@
 <tr>
 <td>value</td>
 <td></td>
-<td>If the LED type is <em>number</em>, specify the desired number here.</td>
+<td>If the LED type is <em>number</em> or <em>custom</em>, specify the desired number here. <em>*custom value must be in quote</em></td>
 </tr>
 
 <tr>
@@ -267,6 +267,21 @@
 <span class="p">});</span>
 </code></pre></div>
 
+<p>Custom Text</p>
+
+<div class="led6"></div>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span></span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.led6&#39;</span><span class="p">).</span><span class="nx">catLED</span><span class="p">({</span>
+    <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;custom&#39;</span><span class="p">,</span>
+    <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;#FF0000&#39;</span><span class="p">,</span>
+    <span class="nx">background_color</span><span class="o">:</span> <span class="s1">&#39;#BCBABA&#39;</span><span class="p">,</span>
+    <span class="nx">size</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="nx">rounded</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="nx">font_type</span><span class="o">:</span> <span class="mi">4</span>
+    <span class="nx">value</span><span class="o">:</span> <span class="mi">&#39;ABCDEFG&#39;  //only ABCDEFGHIJKLMNOPQRSTUVWXYZ@</span>
+<span class="p">});</span>
+</code></pre></div>
+
 
 <script src="js/jquery.js"></script>
 <script src="js/raphael.js"></script>
@@ -317,6 +332,15 @@ $(document).ready(function() {
         size: 6,
         rounded: 9,
         font_type: 3
+    });
+    $('.led6').catLED({
+        type: 'custom',
+        color: '#FF0000',
+        background_color: '#BCBABA',
+        size: 10,
+        rounded: 2,
+        font_type: 4,
+        value: 'ABCDEFG'
     });
 });
 </script>
